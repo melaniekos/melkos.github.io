@@ -9,4 +9,4 @@ redirect_from:
 
 Links
 ======
-- [NLP 2026 Homework] (https://melkos.github.io/projects/
+- [NLP 2026 Homework] (https://melaniekos.github.io/NLP-2026/)
