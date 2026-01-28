@@ -1811,7 +1811,7 @@ cleanup_sticks &lt;- function(data) {
   x &lt;- gsub(&quot;n ight O&quot;, &quot;night&quot;, x)
   x &lt;- gsub(&quot;h m mome&quot;, &quot;home&quot;, x)
   x &lt;- gsub(&quot;mcomplexity&quot;, &quot;complexity&quot;, x)
-  x &lt;- gsub(&quot;odd  M  talismans&quot;, &quot;talismans&quot;, x)
+  x &lt;- gsub(&quot;odd  M  talismans&quot;, &quot;odd talismans&quot;, x)
   x &lt;- gsub(&quot;m   the pole&quot;, &quot;the pole&quot;, x)
 }
 
@@ -1825,8 +1825,8 @@ lowercase_spacing &lt;- function(data) {
 sticks_clean &lt;- cleanup_sticks(sticks)
 sticks_clean &lt;- lowercase_spacing(sticks_clean)
 sticks_clean</code></pre>
-<pre><code>## [1] &quot;every year thanksgiving night we flocked out behind dad as he dragged the santa suit to the road and draped it over a kind of crucifix hed built out of metal pole in the yard super bowl week the pole was dressed in a jersey and rods helmet and rod had to clear it with dad if he wanted to take the helmet off on the fourth of july the pole was uncle sam on veterans day a soldier on halloween a ghost the pole was dads only concession to glee we were allowed a single crayola from the box at a time one christmas eve he shrieked at kimmie for wasting an apple slice he hovered over us as we poured ketchup saying good enough good enough good enough birthday parties consisted of cupcakes no ice cream the first time i brought a date over she said whats with your dad and that pole and i sat there blinking&quot;                                                                                                                                                                                                                                                                                                                                                                                                                         
-## [2] &quot;we left home married had children of our own found the seeds of meanness blooming also within us dad began dressing the pole with more complexity and less discernible logic he draped some kind of fur over it on groundhog day and lugged out a floodlight to ensure a shadow when an earthquake struck chile he lay the pole on its side and spray painted a rift in the earth mom died and he dressed the pole as death and hung from the crossbar photos of mom as a baby wed stop by and find talismans from his youth arranged around the base army medals theater tickets old sweatshirts tubes of moms makeup one autumn he painted the pole bright yellow he covered it with cotton swabs that winter for warmth and provided offspring by hammering in six crossed sticks around the yard he ran lengths of string between the pole and the sticks and taped to the string letters of apology admissions of error pleas for understanding all written in a frantic hand on index cards he painted a sign saying love and hung it from the pole and another that said forgive and then he died in the hall with the radio on and we sold the house to a young couple who yanked out the pole and the sticks and left them by the road on garbage day&quot;</code></pre>
+<pre><code>## [1] &quot;every year thanksgiving night we flocked out behind dad as he dragged the santa suit to the road and draped it over a kind of crucifix hed built out of metal pole in the yard super bowl week the pole was dressed in a jersey and rods helmet and rod had to clear it with dad if he wanted to take the helmet off on the fourth of july the pole was uncle sam on veterans day a soldier on halloween a ghost the pole was dads only concession to glee we were allowed a single crayola from the box at a time one christmas eve he shrieked at kimmie for wasting an apple slice he hovered over us as we poured ketchup saying good enough good enough good enough birthday parties consisted of cupcakes no ice cream the first time i brought a date over she said whats with your dad and that pole and i sat there blinking&quot;                                                                                                                                                                                                                                                                                                                                                                                                                             
+## [2] &quot;we left home married had children of our own found the seeds of meanness blooming also within us dad began dressing the pole with more complexity and less discernible logic he draped some kind of fur over it on groundhog day and lugged out a floodlight to ensure a shadow when an earthquake struck chile he lay the pole on its side and spray painted a rift in the earth mom died and he dressed the pole as death and hung from the crossbar photos of mom as a baby wed stop by and find odd talismans from his youth arranged around the base army medals theater tickets old sweatshirts tubes of moms makeup one autumn he painted the pole bright yellow he covered it with cotton swabs that winter for warmth and provided offspring by hammering in six crossed sticks around the yard he ran lengths of string between the pole and the sticks and taped to the string letters of apology admissions of error pleas for understanding all written in a frantic hand on index cards he painted a sign saying love and hung it from the pole and another that said forgive and then he died in the hall with the radio on and we sold the house to a young couple who yanked out the pole and the sticks and left them by the road on garbage day&quot;</code></pre>
 <pre class="r"><code># Function to put text into a dataframe with a word in each row
 make_df_token &lt;- function(data) {
   df &lt;- tibble(text = data) |&gt;
@@ -1836,7 +1836,7 @@ make_df_token &lt;- function(data) {
 }
 sticks_df &lt;- make_df_token(sticks_clean)
 sticks_df</code></pre>
-<pre><code>## # A tibble: 214 × 2
+<pre><code>## # A tibble: 215 × 2
 ##    word      n
 ##    &lt;chr&gt; &lt;int&gt;
 ##  1 the      29
@@ -1849,15 +1849,20 @@ sticks_df</code></pre>
 ##  8 to        7
 ##  9 in        6
 ## 10 it        5
-## # ℹ 204 more rows</code></pre>
-<pre class="r"><code># Function to remove stop words via tidytext stopwords from dataframe
+## # ℹ 205 more rows</code></pre>
+<pre class="r"><code># How many words in the story?
+sum(sticks_df$n)</code></pre>
+<pre><code>## [1] 392</code></pre>
+<pre class="r"><code># 392 words in Sticks
+
+# Function to remove stop words via tidytext stopwords from dataframe
 remove_stopWords &lt;- function(df) {
   df |&gt; 
     anti_join(stop_words, by = &quot;word&quot;)
 }
 sticks_df &lt;- remove_stopWords(sticks_df)
 sticks_df</code></pre>
-<pre><code>## # A tibble: 146 × 2
+<pre><code>## # A tibble: 147 × 2
 ##    word        n
 ##    &lt;chr&gt;   &lt;int&gt;
 ##  1 pole       12
@@ -1870,7 +1875,7 @@ sticks_df</code></pre>
 ##  8 dressed     2
 ##  9 helmet      2
 ## 10 hung        2
-## # ℹ 136 more rows</code></pre>
+## # ℹ 137 more rows</code></pre>
 <pre class="r"><code># Function to calculate type-token ratio
 calc_ttr &lt;- function(df) {
   n_types &lt;- nrow(df) # Number of unique words
@@ -1880,8 +1885,8 @@ calc_ttr &lt;- function(df) {
 
 ttr_sticks &lt;- calc_ttr(sticks_df)
 ttr_sticks</code></pre>
-<pre><code>## [1] 0.8248588</code></pre>
-<pre class="r"><code># TTR is 0.825!</code></pre>
+<pre><code>## [1] 0.8258427</code></pre>
+<pre class="r"><code># TTR is 0.826!</code></pre>
 </div>
 
 
