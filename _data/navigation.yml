@@ -13,15 +13,10 @@ main:
 
   - title: "Talks"
     url: /talks/    
-
-  - title: "Teaching"
-    url: /teaching/    
-    
-  - title: "Portfolio"
-    url: /portfolio/
+ 
         
-  - title: "Blog Posts"
-    url: /year-archive/
+  - title: "NLP 2026"
+    url: /NLP-2026/
     
   - title: "CV"
     url: /cv/
